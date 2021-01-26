@@ -36,7 +36,7 @@
     chdir: "{{ duo_source_dir }}"
   changed_when: no
 
-- name: install from build
+- name: install from build (this takes a while)
   shell:
     cmd: ./install --install-dir {{ duo_install_dir }} --service-user {{ duo_user }} --log-group duo --create-init-script yes
     chdir: "{{ duo_source_dir }}/duoauthproxy-build"
