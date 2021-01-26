@@ -4,17 +4,35 @@
 
 # Systemcheck
 systemcheck_physical_memory: 2048 # In MB
-systemcheck_swap_memory: 1024 # In MB
-systemcheck_disk: 21474836480 # in bytes ; 20G
+systemcheck_swap_memory: 512 # In MB
+systemcheck_disk: 12884901888 # in bytes ; 12G
 systemcheck_cpus: 2
 
 # Firewall
 role_ports:
 - port: 22
   protocol: tcp
-- port: 80
+- port: 1812
+  protocol: udp
+- port: 389
   protocol: tcp
-- port: 443
+- port: 636
   protocol: tcp
+
+
+duo_packages:
+- gcc
+- make
+- libffi-devel
+- perl
+- zlib-devel
+
+duo_download_source: "https://dl.duosecurity.com/duoauthproxy-latest-src.tgz"
+duo_download_tmp: /tmp/duo_source.tar.gz
+duo_source_dir: /opt/duoauthproxy_source
+duo_install_dir: /srv/duoauthproxy
+duo_user: duo
+duo_config_file: /srv/duoauthproxy/conf/authproxy.cfg
+
 
 ...

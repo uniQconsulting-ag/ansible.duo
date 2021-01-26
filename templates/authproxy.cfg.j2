@@ -1,0 +1,70 @@
+[ad_client]
+host={{ duo_adclient_host }}
+service_account_username={{ duo_adclient_user }}
+service_account_password={{ duo_adclient_pw }}
+search_dn={{ duo_adclient_search_dn }}
+{% if duo_adclient_security_group_dn is defined %}
+security_group_dn={{ duo_adclient_security_group_dn }}
+{% endif %}
+{% if duo_adclient_transport is defined %}
+transport={{ duo_adclient_transport }}
+{% endif %}
+# port=50389
+# ssl_ca_certs_file=/srv/example.com_ca.pem
+# transport=ldaps
+# ssl_verify_hostname=false
+# host_2=dc-02.example.com
+# auth_type=ntlm2
+
+
+{% if duo_adsync == true %}
+
+[cloud]
+ikey={{ duo_adsync_ikey }}
+skey={{ duo_adsync_skey }}
+api_host={{ duo_adsync_api_host }}
+service_account_username={{ duo_ldapbind_user }}
+service_account_password={{ duo_ldapbind_pw }}
+
+{% endif %}
+
+
+{% if duo_radius == true %}
+
+[radius_server_auto]
+ikey={{ duo_radius_ikey }}
+skey={{ duo_radius_skey }}
+api_host={{ duo_radius_api_host }}
+failmode={{ duo_radius_failmode }}
+client=ad_client
+{% for client_set in duo_radius_clients %}
+radius_ip_{{ loop.index }}={{ client_set.ip }}
+radius_secret_{{ loop.index }}={{ client_set.secret }}
+{% endfor %}
+# delimiter=,
+# allow_concat=true
+# port=1812
+
+
+
+{% endif %}
+
+
+{% if duo_ldap == true %}
+
+[ldap_server_auto]
+client=ad_client
+ikey={{ duo_ldap_ikey }}
+skey={{ duo_ldap_skey }}
+api_host={{ duo_ldap_api_host }}
+failmode={{ duo_ldap_failmode }}
+# delimiter=,
+# allow_concat=true
+# port=389
+# api_timeout=0
+# ssl_port=636
+# ssl_key_path=/srv/duoauth_key.pem
+# ssl_cert_path=/srv/duoauth_cert.pem
+# allow_searches_after_bind=true
+
+{% endif %}

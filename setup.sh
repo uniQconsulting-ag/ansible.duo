@@ -1,9 +1,9 @@
 #!/bin/bash
 
 # Variables
-role_name=uniqconsulting.graylog
-role_github_name=ansible.graylog
-role_displayname="Graylog Server"
+role_name=uniqconsulting.duo
+role_github_name=ansible.duo
+role_displayname="DUO Server"
 
 # Check if installer has yet been run
 if [ -f "/etc/ansible/projects/uqcSetup/.INSTALLED" ]; then
@@ -24,9 +24,10 @@ chmod +x /tmp/setup_1.sh
 clear
 
 # Show Dialog
-dialog --title "Setup - Edit Config" --editbox /etc/ansible/projects/uqcSetup/vars/99_$role_name.yml $(expr $(tput lines) - 5) $(expr $(tput cols) - 5) 2> /tmp/99_$role_name.yml
+# dialog --title "Setup - Edit Config" --editbox /etc/ansible/projects/uqcSetup/vars/99_$role_name.yml $(expr $(tput lines) - 5) $(expr $(tput cols) - 5) 2> /tmp/99_$role_name.yml
+nano /etc/ansible/projects/uqcSetup/vars/99_$role_name.yml
 clear
-cp /tmp/99_$role_name.yml /etc/ansible/projects/uqcSetup/vars/99_$role_name.yml > /dev/null
+#cp /tmp/99_$role_name.yml /etc/ansible/projects/uqcSetup/vars/99_$role_name.yml > /dev/null
 
 # Running ansible
 cd /etc/ansible/projects/uqcSetup

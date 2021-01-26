@@ -1,0 +1,3 @@
+- Check Services: `systemctl status duoauthproxy`
+- Config Files: `/srv/duoauthproxy/conf/*`
+- Log Files: `/srv/duoauthproxy/log/*`

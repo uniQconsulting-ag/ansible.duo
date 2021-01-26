@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # Variables
-role_name=uniqconsulting.graylog
-role_install_name=install_X_graylog.yml
+role_name=uniqconsulting.duo
+role_install_name=install_X_duo.yml
 
 # Setup Ansible
 echo "=== Setting up the ansible project ==="
@@ -14,7 +14,7 @@ rm -f install_* > /dev/null
 rm -f vars/* > /dev/null
 rm -rf roles/* > /dev/null
 
-echo "=== Seting up graylog-role ==="
+echo "=== Seting up duo-role ==="
 ansible-galaxy install $role_name
 cp roles/$role_name/tests/vars/99_$role_name.yml vars/
 cp roles/$role_name/tests/$role_install_name install_1_appliance.yml

@@ -1,0 +1,51 @@
+---
+- name: Install Packages
+  yum:
+    name: "{{ duo_packages }}"
+    state: present
+  notify: restart duoauthproxy
+
+- name: create user
+  user:
+    name: "{{ duo_user }}"
+    create_home: no
+    system: yes
+
+- name: Download Source
+  get_url: 
+    url: "{{ duo_download_source }}"
+    dest: "{{ duo_download_tmp }}"
+
+- name: create folder
+  file:
+    path: "{{ duo_source_dir }}"
+    state: directory
+    owner: "{{ duo_user }}"
+    group: "{{ duo_user }}"
+
+
+- name: Unarchive Source
+  unarchive: 
+    src: "{{ duo_download_tmp }}"
+    dest: "{{ duo_source_dir }}"
+    extra_opts: [--strip-components=1]
+
+- name: build from source
+  shell:
+    cmd: make
+    chdir: "{{ duo_source_dir }}"
+  changed_when: no
+
+- name: install from build
+  shell:
+    cmd: ./install --install-dir {{ duo_install_dir }} --service-user {{ duo_user }} --log-group duo --create-init-script yes
+    chdir: "{{ duo_source_dir }}/duoauthproxy-build"
+  changed_when: yes
+  notify: restart duoauthproxy
+
+- name: remove source
+  file:
+    path: "{{ duo_source_dir }}"
+    state: absent    
+
+...

@@ -1,11 +1,7 @@
 ---
-# Here belong all variables, that can be changed by a vars-file,
-# a playbook or a include.
-
-run_systemcheck: yes
-install_openvmtools: yes
-additional_open_ports: []
-
+#################
+#   ROLE-NAME
+#################
 
 # This section connects to the Active Directory, to sync users to the duo cloud
 duo_adsync: yes
@@ -46,4 +42,37 @@ duo_ldap_failmode: safe # safe = if duo is offline, will let user login // secur
 # If this is set to yes, it will download, build and install the duo binaries. if set to no, will only try to update config
 duo_install: yes
 
+
+
+#################
+#   OS Basic
+#################
+
+osbasic_mail: false
+osbasic_sysadmin_email: 'support@example.org'
+osbasic_mail_relay_host: 'smtp.example.org'
+osbasic_sender_domain: 'example.org'
+
+osbasic_syslog: false
+osbasic_syslog_remote_host: '@graylog.example.org:514'
+
+osbasic_snmpd: false
+osbasic_snmp_sourceip: '192.168.1.10'
+osbasic_snmp_community_name: 'MyCommunity'
+
+install_openvmtools: yes
+
+
+#################
+#    Firewall
+#################
+
+additional_open_ports: []
+
+# Example:
+# additional_open_ports:
+# - port: 10050
+#   protocol: tcp
+
 ...
+

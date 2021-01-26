@@ -5,7 +5,7 @@
 
 # Change needed roles here
 - name: download dependencies from galaxy
-  shell: ansible-galaxy install uniqconsulting.os_basic uniqconsulting.open_vm_tools uniqconsulting.firewall uniqconsulting.nginx uniqconsulting.mariadb
+  shell: ansible-galaxy install uniqconsulting.os_basic uniqconsulting.open_vm_tools uniqconsulting.firewall
 
 # Include all roles like this:
 

@@ -29,13 +29,4 @@
     loop_var: include_file_name 
   with_lines: ls {{ role_path }}/tasks/shared | egrep '[0-9]{2}_.*\.yml' | sort -n
 
-######## START: Appliance Part ########
-- name: include post-dependencies
-  include_tasks: "include-file.yml"
-  loop_control:
-    loop_var: include_file_name 
-  loop:
-  - post_dependencies.yml
-######## END: Appliance Part ########
-
 ...
